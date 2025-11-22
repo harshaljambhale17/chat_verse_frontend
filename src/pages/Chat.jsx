@@ -4,6 +4,7 @@ import { MdAddComment } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { getUserChatRooms, getMessages, searchUserByPhoneNumber, createChatRoom, sendChatMessage } from "../services/UserService";
 import UserContext from "../context/UserContext.jsx";
+import { baseURL } from "../config/AxiosHelper.js";
 
 
 function Chat() {
@@ -92,7 +93,8 @@ function Chat() {
         if (typeof SockJS === 'undefined' || typeof Stomp === 'undefined') return;
         if (!selectedRoom) return;
 
-        const sock = new SockJS('http://localhost:8083/chat');
+        // const sock = new SockJS('http://localhost:8083/chat');
+        const sock = new SockJS(`${baseURL}/chat`);
         const client = Stomp.over(sock);
         let subscription;
 
